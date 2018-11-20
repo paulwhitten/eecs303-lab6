@@ -1,0 +1,83 @@
+@startuml
+
+[*] --> Running
+
+State Running {
+    [*] --> State0 
+    state State0
+    State0: timer = 0
+    State0: start timer
+    State0: RedA on
+    State0: GreenA off
+    State0: RedB delay
+    State0: GreenB off
+
+    state State1
+    State1: RedA on
+    State1: GreenA off
+    State1: RedB off
+    State1: GreenB on
+
+    State0 --> State1 : timer == 5 seconds
+
+    state State2
+    State2: RedA on
+    State2: GreenA off
+    State2: RedB off
+    State2: GreenB pale
+
+    State1 --> State2 : timer == 25 seconds
+
+    state State3
+    State3: RedA delay
+    State3: GreenA off
+    State3: RedB off
+    State3: GreenB pale
+
+    State2 --> State3 : timer == 30 seconds
+
+    state State4
+    State4: RedA delay
+    State4: GreenA off
+    State4: RedB on
+    State4: GreenB off
+
+    State3 --> State4 : timer == 35 seconds
+
+    state State5
+    State5: RedA off
+    State5: GreenA on
+    State5: RedB on
+    State5: GreenB off
+
+    State4 --> State5 : timer == 40 seconds
+
+    state State6
+    State6: RedA off
+    State6: GreenA pale
+    State6: RedB on
+    State6: GreenB off
+
+    State5 -> State6 : timer == 60 seconds
+
+    state State7
+    State7: RedA off
+    State7: GreenA pale
+    State7: RedB delay
+    State7: GreenB off
+
+    State6 -> State7 : timer == 65 seconds
+
+    State7 -> State0 : timer == 70 seconds
+}
+
+State Maintenance
+Maintenance: RedA on
+Maintenance: GreenA off
+Maintenance: RedB on
+Maintenance: GreenB off
+
+Running --> Maintenance : switch off
+Maintenance --> Running : switch on 
+
+@enduml

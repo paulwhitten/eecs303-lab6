@@ -1,0 +1,66 @@
+@startuml
+
+Title One Way Traffic Controller
+header: EECS303 Lab 6
+
+concise "Red A" as ra
+concise "Green A" as ga
+concise "Red B" as rb
+concise "Green B" as gb
+
+@0 <-> @70 : One Full Cycle
+
+robust "States" as s
+
+@0
+ra is on
+ga is off
+rb is delay
+gb is off
+s is State0
+
+@5
+rb is off
+gb is on
+ra -> s
+s is State1
+
+@25
+gb is pale
+ra -> s
+s is State2
+
+@30
+ra is delay
+ra -> s
+s is State3
+
+@35
+rb is on
+gb is off
+ra -> s
+s is State4
+
+@40
+ra is off
+ga is on
+ra -> s
+s is State5
+
+@60
+ga is pale
+ra -> s
+s is State6
+
+@65
+rb is delay
+ra -> s
+s is State7
+
+@70
+ra is on
+ga is off
+ra -> s
+s is State0
+
+@enduml
